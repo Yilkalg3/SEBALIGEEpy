@@ -7,4 +7,12 @@ Map = geemap.Map(center=(11.43, 37.12), zoom=11)
 # Import Geometry
 Jedeb = ee.FeatureCollection("projects/ee-yilkalgebeyehu/assets/Jedeb_Catchment")
 
+# Set month and year number
+m = 12
+year = 2022
 
+# Set date for satellite images
+start = datetime.datetime(year, m, 1)
+end = datetime.datetime(year, m, calendar.monthrange(year, m)[1])
+LC_year_1 = datetime.datetime(year, 1, 1)
+LC_year_2 = datetime.datetime(year, 12, 31)
