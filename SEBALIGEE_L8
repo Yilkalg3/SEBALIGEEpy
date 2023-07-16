@@ -1,2 +1,10 @@
 # Import Libaries and Geometry
 import ee, geemap, datetime, calendar, math
+
+# Intialize GEE and create Interactive Map 
+Map = geemap.Map(center=(11.43, 37.12), zoom=11)
+
+# Import Geometry
+Jedeb = ee.FeatureCollection("projects/ee-yilkalgebeyehu/assets/Jedeb_Catchment")
+
+
