@@ -16,3 +16,33 @@ start = datetime.datetime(year, m, 1)
 end = datetime.datetime(year, m, calendar.monthrange(year, m)[1])
 LC_year_1 = datetime.datetime(year, 1, 1)
 LC_year_2 = datetime.datetime(year, 12, 31)
+
+# Constants
+# Specific heat at constant pressure of air, kJ/kg K
+c_p = 1.013
+# Ratio molecular weight of water vapor/dry air
+epsilon = 0.622
+# Solar constant, kJ/m^2/h
+a_s = 0.355
+b_s = 0.68
+I_s = 4921
+# Albedo constant
+a_e = 0.56
+b_e = 0.08
+a_l = 0.2
+c2 = 90
+# Conversion between Kelvin and Celsius
+c3 = 273
+# Stefan-Boltzmann constant, kJ/(m^2 K^4 d)
+sigma = 0.0000049
+coef = 0.33
+# Other constants
+cali = 0.2
+LUE_max = 2.5
+Kt = 23
+Th = 35
+Tl = 0
+# Von karman constant
+von = 0.41
+# Albedo for Et0; refer to https://www.fao.org/3/x0490e/x0490e07.htm
+Albedo = 0.25
