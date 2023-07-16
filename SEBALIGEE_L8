@@ -46,3 +46,76 @@ Tl = 0
 von = 0.41
 # Albedo for Et0; refer to https://www.fao.org/3/x0490e/x0490e07.htm
 Albedo = 0.25
+
+# Import Climate Data (ERA5 Monthly Aggregate)
+climatic = ee.ImageCollection("ECMWF/ERA5_LAND/MONTHLY_AGGR").filter(ee.Filter.date(start, end))
+
+climaticbands = climatic.toBands()
+
+if m < 10:
+    system = str(year) + "0" + str(m)
+else:
+    system = str(year) + str(m)
+
+# Reduce Region
+dict_T = climaticbands.select(system + "_" + "temperature_2m").reduceRegion(**{
+        "reducer": ee.Reducer.mean(),
+        "geometry": Jedeb.geometry(),
+        "scale": 10000,
+        "maxPixels": 1e9,
+    }
+)
+# The result is a Dictionary.  Print it.
+# print(dict_T.getInfo())
+
+# Change the Temperature to celcius.
+T_1 = dict_T.get(system + "_" + "temperature_2m")
+T = ee.Number(T_1).subtract(c3)
+# print(T.getInfo(), 'mean Temperature in C')
+# print(T_1.getInfo(), 'mean Temperature in K')
+
+# Reduce the region dewpoint temperature (Td)
+dict_Td = climaticbands.select(system + "_" + "dewpoint_temperature_2m").reduceRegion(**{
+        "reducer": ee.Reducer.mean(),
+        "geometry": Jedeb.geometry(),
+        "scale": 10000,
+        "maxPixels": 1e9,
+    }
+)
+# The result is a Dictionary.  Print it.
+# print(dict_Td.getInfo())
+Td = dict_Td.get(system + "_" + "dewpoint_temperature_2m")
+
+# Calculating RH from dewpoint temperature
+RH_1 = ee.Number(100).subtract(ee.Number(5).multiply(ee.Number(T_1).subtract(ee.Number(Td))))  
+RH = RH_1.divide(ee.Number(100))
+# print(RH_1.getInfo(), 'Mean Relative Humidity in %')
+
+# Reduce the region Wind_speed (Both eastward and northward )
+dict_Wu = climaticbands.select(system + "_" + "u_component_of_wind_10m").reduceRegion(**{
+        "reducer": ee.Reducer.mean(),
+        "geometry": Jedeb.geometry(),
+        "scale": 10000,
+        "maxPixels": 1e9,
+    }
+)
+
+# The result is a Dictionary.  Print it.
+Wu = dict_Wu.get(system + "_" + "u_component_of_wind_10m")
+
+# Reduce the region Wind_speed (Both eastward and northward )
+dict_Wv = climaticbands.select(system + "_" + "v_component_of_wind_10m").reduceRegion(**{
+        "reducer": ee.Reducer.mean(),
+        "geometry": Jedeb.geometry(),
+        "scale": 10000,
+        "maxPixels": 1e9,
+    }
+)
+
+# The result is a Dictionary.  Print it.
+Wv = dict_Wv.get(system + "_" + "v_component_of_wind_10m")
+
+Wind_speed = ee.Number(Wu).multiply(ee.Number(Wu)).add(ee.Number(Wv).multiply(ee.Number(Wv))).sqrt()
+
+# print(Wind_speed.getInfo(), 'mean Wind Speed in m/s')
+)
