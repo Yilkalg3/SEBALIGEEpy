@@ -1,4 +1,4 @@
-# SEBALIS
+# SEBALI-GEE Python
 SEBALIGEE updated using python api
 
 ## References
