@@ -1,5 +1,5 @@
 # SEBALI-GEE Python
-SEBALIGEE updated using python api
+SEBALIGEE updated using python api and geemap package
 
 ## References
 1. Mhawej, M., Faour, G., 2020. Open-source Google Earth Engine 30-m evapotranspiration rates retrieval: The SEBALIGEE system. Environ. Model. Softw. 133, 104845. https://doi.org/10.1016/j.envsoft.2020.104845
