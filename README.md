@@ -1,5 +1,5 @@
 # SEBALIGEEpy 
-SEBALIGEE updated using python api and geemap package
+The SEBALIGEE updated using python api and geemap package
 
 [![DOI](https://zenodo.org/badge/539522794.svg)](https://zenodo.org/badge/latestdoi/539522794)
 
